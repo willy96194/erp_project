@@ -56,4 +56,28 @@ CREATE TABLE amortization_schedule (
     FOREIGN KEY (credit_account_id) REFERENCES account(id)
 );
 
+CREATE TABLE `company_info` (
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `company_name` varchar(100) DEFAULT NULL,
+  `taxID` varchar(20) NOT NULL,
+  `responsible_person` varchar(100) NOT NULL,
+  `res_phone` varchar(30) NOT NULL,
+  `res_email` varchar(100) NOT NULL UNIQUE
+) 
+
+CREATE TABLE `user_info` (
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `account` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL UNIQUE,
+  `role` tinyint(4) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  
+  FOREIGN KEY (company_id) REFERENCES company_info(id) ON DELETE RESTRICT
+)
+
+
+
 
