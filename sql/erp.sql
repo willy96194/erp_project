@@ -62,21 +62,24 @@ CREATE TABLE `company_info` (
   `taxID` varchar(20) NOT NULL,
   `responsible_person` varchar(100) NOT NULL,
   `res_phone` varchar(30) NOT NULL,
-  `res_email` varchar(100) NOT NULL UNIQUE
+  `res_email` varchar(100) NOT NULL
 ) 
 
 CREATE TABLE `user_info` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `account` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
+--  `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL UNIQUE,
   `role` tinyint(4) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `company_id` int(11) NOT NULL,
   
+  UNIQUE KEY `uniq_email_company` (`email`, `company_id`)
   FOREIGN KEY (company_id) REFERENCES company_info(id) ON DELETE RESTRICT
 )
+
+
 
 
 
